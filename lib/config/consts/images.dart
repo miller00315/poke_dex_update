@@ -1,4 +1,4 @@
 class Images {
-  static const WHITE_POKEBALL = 'assets/images/pokeball.png';
-  static const BLACK_POKE_BALL = 'assets/images/pokeball_dark.png';
+  static const whitePokeball = 'assets/images/pokeball.png';
+  static const blackPokeBall = 'assets/images/pokeball_dark.png';
 }

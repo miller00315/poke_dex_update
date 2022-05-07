@@ -5,7 +5,7 @@ class TopOverflowShadow extends StatelessWidget {
   final Widget child;
   final double elevation;
 
-  TopOverflowShadow({
+  const TopOverflowShadow({
     required this.child,
     this.elevation = 6,
     Key? key,

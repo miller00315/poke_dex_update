@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:poke_dex/config/consts/images.dart';
 import 'package:poke_dex/domain/entities/status_entity.dart';
 import 'package:poke_dex/injector/main.dart';
 import 'package:poke_dex/pages/details/details_page.dart';
@@ -110,6 +111,18 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const HomePageAppBar(),
+            Positioned(
+              top: MediaQuery.of(context).padding.top - 240 / 2.9,
+              left: MediaQuery.of(context).size.width - (240 / 1.6),
+              child: Opacity(
+                child: Image.asset(
+                  Images.blackPokeBall,
+                  height: 240,
+                  width: 240,
+                ),
+                opacity: 0.2,
+              ),
+            ),
           ],
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
+import 'package:poke_dex/config/consts/images.dart';
 import 'package:poke_dex/config/consts/palette.dart';
 import 'package:poke_dex/config/consts/urls.dart';
 import 'package:poke_dex/injector/main.dart';
@@ -38,15 +38,14 @@ class PokeItem extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Hero(
-                      child: Container(),
-                      /* child: Opacity(
+                      child: Opacity(
                         child: Image.asset(
-                          ConstsApp.whitePokeball,
+                          Images.whitePokeball,
                           height: 80,
                           width: 80,
                         ),
-                        opacity: 0.2,
-                      ), */
+                        opacity: 0.5,
+                      ),
                       tag: pokemon.name! + 'roatation',
                     ),
                   ),

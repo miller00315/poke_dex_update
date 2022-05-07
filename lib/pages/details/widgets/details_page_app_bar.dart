@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:poke_dex/config/consts/images.dart';
 import 'package:poke_dex/injector/main.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 
@@ -14,6 +15,7 @@ class DetailsPageAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(opacityTitleAppBar);
     return AppBar(
       centerTitle: true,
       elevation: 0,
@@ -25,12 +27,16 @@ class DetailsPageAppBar extends StatelessWidget {
       actions: [
         AnimatedOpacity(
           duration: const Duration(milliseconds: 200),
-          child: Container(
-            color: Colors.white,
-            height: 50,
-            width: 50,
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 200),
+            child: Image.asset(
+              Images.whitePokeball,
+              height: 50,
+              width: 50,
+            ),
+            opacity: opacityTitleAppBar,
           ),
-          opacity: opacityTitleAppBar >= 0.2 ? 0.2 : 0.0,
+          opacity: opacityTitleAppBar,
         ),
         Observer(
           builder: (BuildContext context) => IconButton(

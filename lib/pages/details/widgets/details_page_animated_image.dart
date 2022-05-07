@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:poke_dex/config/consts/images.dart';
 import 'package:poke_dex/injector/main.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 
@@ -21,6 +22,14 @@ class DetailsPageAnimatedImage extends StatelessWidget {
 
     return Stack(
       children: [
+        Opacity(
+          opacity: 0.4,
+          child: Image.asset(
+            Images.whitePokeball,
+            height: 200,
+            width: 200,
+          ),
+        ),
         IgnorePointer(
           child: Observer(
             name: 'Pokemon',

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:poke_dex/pages/home_page/home_page.dart';
 
 import 'injector/main.dart' as injector;
@@ -16,12 +17,10 @@ void main() async {
   };
 
   await injector.init(
-    repositoryInjector: /* kDebugMode
+    repositoryInjector: kDebugMode
         ? injector.RepositoryInjector.UseMock
-        : */ injector.RepositoryInjector.UseApi,
+        : injector.RepositoryInjector.UseApi,
   );
-
-  //await GlobalConfiguration().loadFromAsset('env');
 
   //print(Env().apiUrl);
 
