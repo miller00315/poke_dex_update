@@ -45,4 +45,6 @@ class Palette {
         return Colors.grey;
     }
   }
+
+  static const unselectedLabelColor = Color(0xff5f6368);
 }

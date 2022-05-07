@@ -60,8 +60,8 @@ class PokemonDetailModel extends Equatable {
         types = <TypeModel>[],
         weight = json['weight'] {
     if (json['abilities'] != null) {
-      json['abilities'].forEach((abilities) {
-        abilities!.add(AbilitiesModel.fromJson(abilities));
+      json['abilities'].forEach((ability) {
+        abilities!.add(AbilitiesModel.fromJson(ability));
       });
     }
 

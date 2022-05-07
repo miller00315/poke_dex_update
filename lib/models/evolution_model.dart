@@ -10,7 +10,7 @@ class EvolutionModel extends Equatable {
   });
 
   EvolutionModel.fromJson(Map<String, dynamic> json)
-      : number = json['number'],
+      : number = json['num'],
         name = json['name'];
 
   @override

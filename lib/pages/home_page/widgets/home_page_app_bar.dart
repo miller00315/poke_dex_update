@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poke_dex/config/consts/appText.dart';
 
 class HomePageAppBar extends StatelessWidget {
   const HomePageAppBar({Key? key}) : super(key: key);
@@ -24,12 +25,12 @@ class HomePageAppBar extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: const Text(
-                  'Pokedex',
-                  style: const TextStyle(
+            children: const [
+              Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Text(
+                  AppText.POKEDEX,
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 28,
                   ),

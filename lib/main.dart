@@ -16,9 +16,9 @@ void main() async {
   };
 
   await injector.init(
-    repositoryInjector: kDebugMode
+    repositoryInjector: /* kDebugMode
         ? injector.RepositoryInjector.UseMock
-        : injector.RepositoryInjector.UseApi,
+        : */ injector.RepositoryInjector.UseApi,
   );
 
   //await GlobalConfiguration().loadFromAsset('env');

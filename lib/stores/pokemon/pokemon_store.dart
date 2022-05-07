@@ -4,6 +4,7 @@ import 'package:poke_dex/config/consts/palette.dart';
 import 'package:poke_dex/config/consts/urls.dart';
 import 'package:poke_dex/domain/entities/status_entity.dart';
 import 'package:poke_dex/domain/repositories/pokemon_repository.dart';
+import 'package:poke_dex/domain/repositories/secure_storage_repository.dart';
 import 'package:poke_dex/models/pokemon_list_model.dart';
 import 'package:poke_dex/models/pokemon_model.dart';
 import 'package:poke_dex/utils/string_replace.dart';
@@ -13,15 +14,23 @@ part 'pokemon_store.g.dart';
 class PokemonStore = _PokemonStoreBase with _$PokemonStore;
 
 abstract class _PokemonStoreBase with Store {
-  final PokemonRepository pokemonRepository;
+  final PokemonRepository _pokemonRepository;
 
-  _PokemonStoreBase(this.pokemonRepository);
+  final SecureStorageRepository _secureStorageRepository;
+
+  _PokemonStoreBase(
+    this._pokemonRepository,
+    this._secureStorageRepository,
+  );
 
   @observable
   PokeListModel? _pokeList;
 
   @observable
   PokemonModel? _currentPokemon;
+
+  @observable
+  List<int> favorites = [];
 
   @observable
   Color? pokemonColor;
@@ -45,12 +54,16 @@ abstract class _PokemonStoreBase with Store {
     try {
       fetchStatus = InProgressStatus();
 
-      _pokeList = await pokemonRepository.fetchPokemonList();
+      _pokeList = await _pokemonRepository.fetchPokemonList();
 
       fetchStatus = DoneStatus();
     } catch (e) {
       fetchStatus = ErrorStatus();
     }
+  }
+
+  PokemonModel getPokemon({required int index}) {
+    return _pokeList!.pokemonList![index];
   }
 
   @action
@@ -70,5 +83,31 @@ abstract class _PokemonStoreBase with Store {
         variables: {Urls.POKEMON_IMAGE_NUMBER: number},
       ),
     );
+  }
+
+  @action
+  Future favoriteUnfavorite(int id) async {
+    try {
+      if (favorites.contains(id)) {
+        favorites = List.from(favorites.where((element) => element != id));
+      } else {
+        favorites = List.from([...favorites, id]);
+      }
+
+      await _secureStorageRepository.setFavoritesItem(favorites);
+    } catch (e, stackTrace) {
+      print(e);
+      print(stackTrace);
+    }
+  }
+
+  @action
+  Future getFavorites() async {
+    try {
+      favorites = await _secureStorageRepository.getFavoritesItems();
+    } catch (e, stackTrace) {
+      print(e);
+      print(stackTrace);
+    }
   }
 }

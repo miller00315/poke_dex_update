@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:poke_dex/domain/repositories/secure_storage_repository.dart';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageRepositoryData extends SecureStorageRepository {
@@ -22,6 +20,6 @@ class SecureStorageRepositoryData extends SecureStorageRepository {
       return [];
     }
 
-    return jsonDecode(data) as List<int>;
+    return List<int>.from(jsonDecode(data));
   }
 }

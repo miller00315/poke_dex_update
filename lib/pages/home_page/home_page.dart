@@ -34,6 +34,10 @@ class _HomePageState extends State<HomePage> {
     if (_pokemonStore!.pokeList == null) {
       _pokemonStore!.fetchPokemonList();
     }
+
+    if (_pokemonStore!.favorites.isEmpty) {
+      _pokemonStore!.getFavorites();
+    }
   }
 
   void _handlePokemonTap({
@@ -54,9 +58,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double statusWidget = MediaQuery.of(context).padding.top;
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,

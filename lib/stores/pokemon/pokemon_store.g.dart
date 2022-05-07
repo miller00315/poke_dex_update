@@ -56,6 +56,22 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
     });
   }
 
+  late final _$favoritesAtom =
+      Atom(name: '_PokemonStoreBase.favorites', context: context);
+
+  @override
+  List<int> get favorites {
+    _$favoritesAtom.reportRead();
+    return super.favorites;
+  }
+
+  @override
+  set favorites(List<int> value) {
+    _$favoritesAtom.reportWrite(value, super.favorites, () {
+      super.favorites = value;
+    });
+  }
+
   late final _$pokemonColorAtom =
       Atom(name: '_PokemonStoreBase.pokemonColor', context: context);
 
@@ -112,6 +128,23 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
     return _$fetchPokemonListAsyncAction.run(() => super.fetchPokemonList());
   }
 
+  late final _$favoriteUnfavoriteAsyncAction =
+      AsyncAction('_PokemonStoreBase.favoriteUnfavorite', context: context);
+
+  @override
+  Future<dynamic> favoriteUnfavorite(int id) {
+    return _$favoriteUnfavoriteAsyncAction
+        .run(() => super.favoriteUnfavorite(id));
+  }
+
+  late final _$getFavoritesAsyncAction =
+      AsyncAction('_PokemonStoreBase.getFavorites', context: context);
+
+  @override
+  Future<dynamic> getFavorites() {
+    return _$getFavoritesAsyncAction.run(() => super.getFavorites());
+  }
+
   late final _$_PokemonStoreBaseActionController =
       ActionController(name: '_PokemonStoreBase', context: context);
 
@@ -140,6 +173,7 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
   @override
   String toString() {
     return '''
+favorites: ${favorites},
 pokemonColor: ${pokemonColor},
 currentPosition: ${currentPosition},
 fetchStatus: ${fetchStatus},
