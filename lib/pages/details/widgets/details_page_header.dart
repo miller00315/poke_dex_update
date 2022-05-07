@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poke_dex/config/consts/font_sizes.dart';
 
 import '../../../widgets/layout/poke_item_types.dart';
 
@@ -23,7 +24,7 @@ class DetailsPageHeader extends StatelessWidget {
           children: <Widget>[
             PokeItemTypes(
               types: types,
-              fontSize: 14,
+              fontSize: FontSizes.small,
               width: 8,
               height: 8,
             ),
@@ -31,7 +32,7 @@ class DetailsPageHeader extends StatelessWidget {
               '# $number',
               style: const TextStyle(
                 //fontFamily: 'Google',
-                fontSize: 26,
+                fontSize: FontSizes.ultraLarge,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),

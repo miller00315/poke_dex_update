@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:poke_dex/config/consts/font_sizes.dart';
 import 'package:poke_dex/models/pokemon_model.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 
@@ -30,7 +31,7 @@ class EvolutionTab extends StatelessWidget {
             child: Text(
               pokemonEvolution.name!,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: FontSizes.medium,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -50,7 +51,7 @@ class EvolutionTab extends StatelessWidget {
         child: Text(
           pokemonStore!.currentPokemon!.name!,
           style: const TextStyle(
-            fontSize: 16,
+            fontSize: FontSizes.medium,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -73,7 +74,7 @@ class EvolutionTab extends StatelessWidget {
             child: Text(
               f.name!,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: FontSizes.medium,
                 fontWeight: FontWeight.bold,
               ),
             ),

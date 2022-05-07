@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:poke_dex/config/consts/font_sizes.dart';
 import 'package:poke_dex/injector/main.dart';
 import 'package:poke_dex/models/pokemon_detail_model.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_v2_store.dart';
@@ -56,49 +57,49 @@ class StatusTab extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'Velocidade',
-                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
                     'Sp. Def',
-                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
                     'Sp. Atq',
-                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
                     'Defesa',
-                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
                     'Ataque',
-                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
                     'HP',
-                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
                     'Total',
-                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                 ],
               ),
@@ -113,7 +114,7 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[0].toString(),
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                          fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -121,7 +122,7 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[1].toString(),
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                          fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -129,7 +130,7 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[2].toString(),
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                          fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -137,7 +138,7 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[3].toString(),
                       style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -145,7 +146,7 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[4].toString(),
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                          fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -153,7 +154,7 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[5].toString(),
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                          fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -161,7 +162,7 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[6].toString(),
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                          fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,

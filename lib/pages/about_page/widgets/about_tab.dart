@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:poke_dex/config/consts/font_sizes.dart';
 import 'package:poke_dex/domain/entities/status_entity.dart';
 import 'package:poke_dex/injector/main.dart';
 import 'package:poke_dex/models/specie.dart';
@@ -41,7 +42,7 @@ class _AboutTabState extends State<AboutTab> {
           const Text(
             'Descrição',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: FontSizes.medium,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -66,7 +67,7 @@ class _AboutTabState extends State<AboutTab> {
                                   .first
                                   .flavorText!,
                               style: const TextStyle(
-                                fontSize: 14,
+                                fontSize: FontSizes.small,
                               ),
                             )
                           : const Center(
@@ -91,7 +92,7 @@ class _AboutTabState extends State<AboutTab> {
           const Text(
             'Biologia',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: FontSizes.medium,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -110,7 +111,7 @@ class _AboutTabState extends State<AboutTab> {
                         const Text(
                           'Altura',
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: FontSizes.small,
                             fontWeight: FontWeight.bold,
                             color: Colors.black54,
                           ),
@@ -118,7 +119,7 @@ class _AboutTabState extends State<AboutTab> {
                         Text(
                           _pokemonStore!.currentPokemon!.height!,
                           style: const TextStyle(
-                            fontSize: 14,
+                            fontSize: FontSizes.small,
                             color: Colors.black,
                           ),
                         ),
@@ -133,7 +134,7 @@ class _AboutTabState extends State<AboutTab> {
                         const Text(
                           'Peso',
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: FontSizes.small,
                             fontWeight: FontWeight.bold,
                             color: Colors.black54,
                           ),
@@ -141,7 +142,7 @@ class _AboutTabState extends State<AboutTab> {
                         Text(
                           _pokemonStore!.currentPokemon!.weight!,
                           style: const TextStyle(
-                            fontSize: 14,
+                            fontSize: FontSizes.small,
                             color: Colors.black,
                           ),
                         ),
