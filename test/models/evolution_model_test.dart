@@ -6,7 +6,7 @@ void main() {
   final faker = Faker();
 
   final Map<String, dynamic> json = {
-    "number": faker.person.name(),
+    "num": faker.person.name(),
     "name": faker.person.name(),
   };
 
@@ -22,7 +22,7 @@ void main() {
 
       expect(
         evolutionModel.number,
-        json['number'],
+        json['num'],
         reason: 'number doesn\'t match',
       );
     });

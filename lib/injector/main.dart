@@ -13,11 +13,6 @@ Future<void> init({
   RepositoryInjector repositoryInjector = RepositoryInjector.UseApi,
 }) async {
   storesInjector(serviceLocator);
-
-  serviceLocator.registerLazySingleton<SecureStorageRepository>(
-    () => SecureStorageRepositoryData(),
-  );
-
   (repositoryInjector == RepositoryInjector.UseApi)
       ? repositoriesReleaseInjector(serviceLocator)
       : repositoriesMockInjector(serviceLocator);

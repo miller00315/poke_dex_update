@@ -9,6 +9,7 @@ class PokeItemTypes extends StatelessWidget {
   final double? fontSize;
   final double? height;
   final double? width;
+  final bool shouldTranslate;
 
   final translator = GoogleTranslator();
 
@@ -18,6 +19,7 @@ class PokeItemTypes extends StatelessWidget {
     this.fontSize,
     this.height,
     this.width,
+    this.shouldTranslate = true,
   }) : super(key: key);
 
   Future<String> translatedText(String text) async {
@@ -25,6 +27,16 @@ class PokeItemTypes extends StatelessWidget {
 
     return translation.text;
   }
+
+  Widget buildText(String text) => Text(
+        text,
+        style: TextStyle(
+          fontFamily: 'Google',
+          fontSize: fontSize,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -40,36 +52,30 @@ class PokeItemTypes extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(6.0),
-                  child: FutureBuilder(
-                    future: translatedText(
-                      type.trim(),
-                    ),
-                    builder: (context, snapshot) {
-                      var text = AppText.translating;
+                  child: shouldTranslate
+                      ? FutureBuilder(
+                          future: translatedText(
+                            type.trim(),
+                          ),
+                          builder: (context, snapshot) {
+                            var text = AppText.translating;
 
-                      if (snapshot.hasError) {
-                        text = AppText.error;
-                      }
+                            if (snapshot.hasError) {
+                              text = AppText.error;
+                            }
 
-                      if (snapshot.hasData) {
-                        text = snapshot.data.toString();
+                            if (snapshot.hasData) {
+                              text = snapshot.data.toString();
 
-                        if (text == AppText.error) {
-                          text = AppText.insect;
-                        }
-                      }
+                              if (text == AppText.error) {
+                                text = AppText.insect;
+                              }
+                            }
 
-                      return Text(
-                        text,
-                        style: TextStyle(
-                          fontFamily: 'Google',
-                          fontSize: fontSize,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      );
-                    },
-                  ),
+                            return buildText(text);
+                          },
+                        )
+                      : buildText(type.trim()),
                 ),
               ),
               SizedBox(

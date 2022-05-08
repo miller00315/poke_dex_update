@@ -64,6 +64,9 @@ dev_dependencies:
   # A library for Dart that generates fake data.
   faker: ^2.0.0
 
+  # Mock library for Dart inspired by Mockito.
+  mockito: ^5.1.0
+
   test: any
 
 flutter:
