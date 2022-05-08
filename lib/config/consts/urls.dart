@@ -1,6 +1,6 @@
 class Urls {
-  static const POKEMON_IMAGE_URL =
+  static const pokemonImageUrl =
       'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/{{number}}.png';
 
-  static const POKEMON_IMAGE_NUMBER = 'number';
+  static const pokemonImageReplaceNumberParameter = 'number';
 }

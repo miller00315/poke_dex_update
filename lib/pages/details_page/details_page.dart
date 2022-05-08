@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:poke_dex/config/consts/urls.dart';
 import 'package:poke_dex/injector/main.dart';
-import 'package:poke_dex/models/pokemon_model.dart';
-import 'package:poke_dex/pages/details/widgets/details_page_animated_image.dart';
-import 'package:poke_dex/pages/details/widgets/details_page_app_bar.dart';
-import 'package:poke_dex/pages/details/widgets/details_page_body.dart';
-import 'package:poke_dex/pages/details/widgets/details_page_header.dart';
+import 'package:poke_dex/pages/details_page/widgets/details_page_animated_image.dart';
+import 'package:poke_dex/pages/details_page/widgets/details_page_app_bar.dart';
+import 'package:poke_dex/pages/details_page/widgets/details_page_body.dart';
+import 'package:poke_dex/pages/details_page/widgets/details_page_header.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_v2_store.dart';
-import 'package:poke_dex/utils/string_replace.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -31,8 +28,8 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   PageController? _pageController;
 
-  PokemonStore? _pokemonStore;
-  PokemonV2Store? _pokemonV2Store;
+  late PokemonStore _pokemonStore;
+  late PokemonV2Store _pokemonV2Store;
 
   late double _progress;
   double? _multiple;
@@ -50,9 +47,9 @@ class _DetailsPageState extends State<DetailsPage> {
 
     _pokemonV2Store = widget.pokemonV2Store ?? serviceLocator<PokemonV2Store>();
 
-    _pokemonV2Store!.fetchPokemonDetails(_pokemonStore!.currentPokemon!.name!);
+    _pokemonV2Store.fetchPokemonDetails(_pokemonStore.currentPokemon!.name!);
 
-    _pokemonV2Store!.fetchSpecie(_pokemonStore!.currentPokemon!.id!);
+    _pokemonV2Store.fetchSpecie(_pokemonStore.currentPokemon!.id!);
 
     _progress = 0;
     _multiple = 1;
@@ -63,7 +60,7 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   void dispose() {
     _pageController!.dispose();
-    _pokemonV2Store!.dispose();
+    _pokemonV2Store.dispose();
 
     super.dispose();
   }
@@ -108,8 +105,8 @@ class _DetailsPageState extends State<DetailsPage> {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        _pokemonStore!.pokemonColor!.withOpacity(0.7),
-                        _pokemonStore!.pokemonColor!
+                        _pokemonStore.pokemonColor!.withOpacity(0.7),
+                        _pokemonStore.pokemonColor!
                       ],
                     ),
                   ),
@@ -123,7 +120,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         top: height * 0.12 - _progress * (height * 0.060),
                         left: 20 + _progress * (height * 0.060),
                         child: Text(
-                          _pokemonStore!.currentPokemon!.name!,
+                          _pokemonStore.currentPokemon!.name!,
                           style: TextStyle(
                             fontSize: 38 - _progress * (height * 0.011),
                             fontWeight: FontWeight.bold,
@@ -134,8 +131,8 @@ class _DetailsPageState extends State<DetailsPage> {
                       Positioned(
                         top: MediaQuery.of(context).size.height * 0.16,
                         child: DetailsPageHeader(
-                          number: _pokemonStore!.currentPokemon!.num!,
-                          types: _pokemonStore!.currentPokemon!.type!,
+                          number: _pokemonStore.currentPokemon!.num!,
+                          types: _pokemonStore.currentPokemon!.type!,
                         ),
                       ),
                     ],
@@ -159,16 +156,16 @@ class _DetailsPageState extends State<DetailsPage> {
                     physics: const BouncingScrollPhysics(),
                     controller: _pageController,
                     onPageChanged: (index) {
-                      _pokemonStore!.setCurrentPokemon(index: index);
+                      _pokemonStore.setCurrentPokemon(index: index);
 
-                      _pokemonV2Store!.fetchPokemonDetails(
-                        _pokemonStore!.currentPokemon!.name!,
+                      _pokemonV2Store.fetchPokemonDetails(
+                        _pokemonStore.currentPokemon!.name!,
                       );
 
-                      _pokemonV2Store!
-                          .fetchSpecie(_pokemonStore!.currentPokemon!.id!);
+                      _pokemonV2Store
+                          .fetchSpecie(_pokemonStore.currentPokemon!.id!);
                     },
-                    itemCount: _pokemonStore!.pokeList!.pokemonList!.length,
+                    itemCount: _pokemonStore.pokeList!.pokemonList!.length,
                     itemBuilder: (context, index) => DetailsPageAnimatedImage(
                       index: index,
                     ),

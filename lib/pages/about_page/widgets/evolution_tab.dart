@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:poke_dex/config/consts/font_sizes.dart';
+import 'package:poke_dex/injector/main.dart';
 import 'package:poke_dex/models/pokemon_model.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 
-class EvolutionTab extends StatelessWidget {
+class EvolutionTab extends StatefulWidget {
   final PokemonStore? pokemonStore;
 
   const EvolutionTab({
     Key? key,
-    required this.pokemonStore,
+    this.pokemonStore,
   }) : super(key: key);
+
+  @override
+  State<EvolutionTab> createState() => _EvolutionTabState();
+}
+
+class _EvolutionTabState extends State<EvolutionTab> {
+  late PokemonStore _pokemonStore;
+
+  @override
+  void initState() {
+    _pokemonStore = widget.pokemonStore ?? serviceLocator<PokemonStore>();
+
+    super.initState();
+  }
 
   Widget resizePokemon(Widget widget) {
     return SizedBox(height: 80, width: 80, child: widget);
@@ -22,7 +37,7 @@ class EvolutionTab extends StatelessWidget {
       for (var pokemonEvolution in pokemon.prevEvolution!) {
         _list.add(
           resizePokemon(
-            pokemonStore!.getImage(number: pokemonEvolution.number!),
+            _pokemonStore.getImage(number: pokemonEvolution.number!),
           ),
         );
         _list.add(
@@ -42,14 +57,14 @@ class EvolutionTab extends StatelessWidget {
     }
     _list.add(
       resizePokemon(
-        pokemonStore!.getImage(number: pokemonStore!.currentPokemon!.num!),
+        _pokemonStore.getImage(number: _pokemonStore.currentPokemon!.num!),
       ),
     );
     _list.add(
       Padding(
         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
         child: Text(
-          pokemonStore!.currentPokemon!.name!,
+          _pokemonStore.currentPokemon!.name!,
           style: const TextStyle(
             fontSize: FontSizes.medium,
             fontWeight: FontWeight.bold,
@@ -63,7 +78,7 @@ class EvolutionTab extends StatelessWidget {
       for (var f in pokemon.nextEvolution!) {
         _list.add(
           resizePokemon(
-            pokemonStore!.getImage(
+            _pokemonStore.getImage(
               number: f.number!,
             ),
           ),
@@ -95,7 +110,7 @@ class EvolutionTab extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
       child: Observer(
         builder: (context) {
-          PokemonModel pokemon = pokemonStore!.currentPokemon!;
+          PokemonModel pokemon = _pokemonStore.currentPokemon!;
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

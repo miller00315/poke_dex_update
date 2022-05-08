@@ -8,6 +8,7 @@ import 'package:poke_dex/domain/repositories/secure_storage_repository.dart';
 import 'package:poke_dex/models/pokemon_list_model.dart';
 import 'package:poke_dex/models/pokemon_model.dart';
 import 'package:poke_dex/utils/string_replace.dart';
+import 'dart:developer' as developer;
 
 part 'pokemon_store.g.dart';
 
@@ -79,8 +80,8 @@ abstract class _PokemonStoreBase with Store {
   Widget getImage({required String number}) {
     return Image.network(
       replaceVariables(
-        text: Urls.POKEMON_IMAGE_URL,
-        variables: {Urls.POKEMON_IMAGE_NUMBER: number},
+        text: Urls.pokemonImageUrl,
+        variables: {Urls.pokemonImageReplaceNumberParameter: number},
       ),
     );
   }
@@ -96,8 +97,11 @@ abstract class _PokemonStoreBase with Store {
 
       await _secureStorageRepository.setFavoritesItem(favorites);
     } catch (e, stackTrace) {
-      print(e);
-      print(stackTrace);
+      developer.log(
+        e.toString(),
+        name: 'pokemon_store.dart',
+        error: stackTrace.toString(),
+      );
     }
   }
 
@@ -106,8 +110,11 @@ abstract class _PokemonStoreBase with Store {
     try {
       favorites = await _secureStorageRepository.getFavoritesItems();
     } catch (e, stackTrace) {
-      print(e);
-      print(stackTrace);
+      developer.log(
+        e.toString(),
+        name: 'pokemon_store.dart',
+        error: stackTrace.toString(),
+      );
     }
   }
 }

@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:poke_dex/config/consts/app_text.dart';
 import 'package:poke_dex/config/consts/font_sizes.dart';
 import 'package:poke_dex/injector/main.dart';
 import 'package:poke_dex/models/pokemon_detail_model.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_v2_store.dart';
 
-class StatusTab extends StatelessWidget {
-  final PokemonV2Store _pokemonV2Store = serviceLocator<PokemonV2Store>();
+class StatusTab extends StatefulWidget {
+  final PokemonV2Store? pokemonV2Store;
 
-  StatusTab({Key? key}) : super(key: key);
+  const StatusTab({
+    Key? key,
+    this.pokemonV2Store,
+  }) : super(key: key);
+
+  @override
+  State<StatusTab> createState() => _StatusTabState();
+}
+
+class _StatusTabState extends State<StatusTab> {
+  late PokemonV2Store _pokemonV2Store;
+
+  @override
+  void initState() {
+    _pokemonV2Store = widget.pokemonV2Store ?? serviceLocator<PokemonV2Store>();
+    super.initState();
+  }
 
   List<int?> getStatusPokemon(PokemonDetailModel? pokeApiV2) {
     List<int?> list = [1, 2, 3, 4, 5, 6, 7];
@@ -51,55 +68,62 @@ class StatusTab extends StatelessWidget {
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: <Widget>[
+            children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+                children: [
                   Text(
-                    'Velocidade',
-                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
+                    AppText.speed,
+                    style: TextStyle(
+                        fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'Sp. Def',
-                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
+                    AppText.sp_def,
+                    style: TextStyle(
+                        fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'Sp. Atq',
-                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
+                    AppText.sp_atq,
+                    style: TextStyle(
+                        fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'Defesa',
-                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
+                    AppText.defense,
+                    style: TextStyle(
+                        fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'Ataque',
-                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
+                    AppText.attack,
+                    style: TextStyle(
+                        fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'HP',
-                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
+                    AppText.hp,
+                    style: TextStyle(
+                        fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'Total',
-                    style: TextStyle(fontSize: FontSizes.medium, color: Colors.grey[600]),
+                    AppText.total,
+                    style: TextStyle(
+                        fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
                 ],
               ),
@@ -114,7 +138,8 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[0].toString(),
                       style: const TextStyle(
-                          fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
+                          fontSize: FontSizes.medium,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -122,7 +147,8 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[1].toString(),
                       style: const TextStyle(
-                          fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
+                          fontSize: FontSizes.medium,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -130,15 +156,17 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[2].toString(),
                       style: const TextStyle(
-                          fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
+                          fontSize: FontSizes.medium,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Text(
                       _list[3].toString(),
-                      style:
-                          TextStyle(fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: FontSizes.medium,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -146,7 +174,8 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[4].toString(),
                       style: const TextStyle(
-                          fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
+                          fontSize: FontSizes.medium,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -154,7 +183,8 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[5].toString(),
                       style: const TextStyle(
-                          fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
+                          fontSize: FontSizes.medium,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -162,7 +192,9 @@ class StatusTab extends StatelessWidget {
                     Text(
                       _list[6].toString(),
                       style: const TextStyle(
-                          fontSize: FontSizes.medium, fontWeight: FontWeight.bold),
+                        fontSize: FontSizes.medium,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -229,9 +261,12 @@ class StatusTab extends StatelessWidget {
 }
 
 class StatusBar extends StatelessWidget {
-  final double? widthFactor;
+  final double widthFactor;
 
-  const StatusBar({Key? key, this.widthFactor}) : super(key: key);
+  const StatusBar({
+    Key? key,
+    required this.widthFactor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -252,7 +287,7 @@ class StatusBar extends StatelessWidget {
             child: Container(
               decoration: ShapeDecoration(
                 shape: const StadiumBorder(),
-                color: widthFactor! > 0.5 ? Colors.teal : Colors.red,
+                color: widthFactor > 0.5 ? Colors.teal : Colors.red,
               ),
             ),
           ),

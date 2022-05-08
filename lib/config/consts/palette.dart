@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class Palette {
@@ -46,4 +45,6 @@ class Palette {
   }
 
   static const unselectedLabelColor = Color(0xff5f6368);
+  static const pokemonTypeBackground = Color.fromARGB(80, 255, 255, 255);
+  static const favoriteColor = Color(0xffa83f39);
 }

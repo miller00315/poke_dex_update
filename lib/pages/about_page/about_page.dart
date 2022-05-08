@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:poke_dex/config/consts/app_text.dart';
 import 'package:poke_dex/config/consts/palette.dart';
 import 'package:poke_dex/injector/main.dart';
 import 'package:poke_dex/pages/about_page/widgets/about_tab.dart';
@@ -24,7 +25,7 @@ class _AboutPageState extends State<AboutPage>
     with SingleTickerProviderStateMixin {
   TabController? _tabController;
   PageController? _pageController;
-  PokemonStore? _pokemonStore;
+  late PokemonStore _pokemonStore;
   late ReactionDisposer _disposer;
 
   @override
@@ -36,7 +37,7 @@ class _AboutPageState extends State<AboutPage>
     _pokemonStore = widget.pokemonStore ?? serviceLocator<PokemonStore>();
 
     _disposer = reaction(
-      (f) => _pokemonStore!.currentPokemon,
+      (f) => _pokemonStore.currentPokemon,
       (dynamic r) => _pageController!.animateToPage(
         0,
         duration: const Duration(milliseconds: 300),
@@ -79,17 +80,17 @@ class _AboutPageState extends State<AboutPage>
                 fontWeight: FontWeight.w700,
               ),
               indicatorSize: TabBarIndicatorSize.label,
-              labelColor: _pokemonStore!.pokemonColor,
+              labelColor: _pokemonStore.pokemonColor,
               unselectedLabelColor: Palette.unselectedLabelColor,
               tabs: const [
                 Tab(
-                  text: "Sobre",
+                  text: AppText.about,
                 ),
                 Tab(
-                  text: "Evolução",
+                  text: AppText.evolution,
                 ),
                 Tab(
-                  text: "Status",
+                  text: AppText.status,
                 ),
               ],
             ),
@@ -102,11 +103,9 @@ class _AboutPageState extends State<AboutPage>
           duration: const Duration(milliseconds: 300),
         ),
         controller: _pageController,
-        children: [
+        children: const [
           AboutTab(),
-          EvolutionTab(
-            pokemonStore: _pokemonStore!,
-          ),
+          EvolutionTab(),
           StatusTab(),
         ],
       ),

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:poke_dex/config/consts/app_text.dart';
+import 'package:poke_dex/config/consts/font_sizes.dart';
 import 'package:poke_dex/config/consts/images.dart';
+import 'package:poke_dex/config/consts/images_size.dart';
 import 'package:poke_dex/domain/entities/status_entity.dart';
 import 'package:poke_dex/injector/main.dart';
-import 'package:poke_dex/pages/details/details_page.dart';
+import 'package:poke_dex/pages/details_page/details_page.dart';
 import 'package:poke_dex/pages/home_page/widgets/home_page_app_bar.dart';
 import 'package:poke_dex/pages/home_page/widgets/home_page_body.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
-import 'package:poke_dex/widgets/shadows/top_overflow_shadow.dart';
+import 'package:poke_dex/widgets/layout/double_tap_to_close_app.dart';
+import 'package:poke_dex/widgets/layout/error_page.dart';
 
 import '../../models/pokemon_model.dart';
 
@@ -24,7 +28,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  PokemonStore? _pokemonStore;
+  late PokemonStore _pokemonStore;
 
   @override
   void initState() {
@@ -32,12 +36,12 @@ class _HomePageState extends State<HomePage> {
 
     _pokemonStore = widget.pokemonStoreTest ?? serviceLocator<PokemonStore>();
 
-    if (_pokemonStore!.pokeList == null) {
-      _pokemonStore!.fetchPokemonList();
+    if (_pokemonStore.pokeList == null) {
+      _pokemonStore.fetchPokemonList();
     }
 
-    if (_pokemonStore!.favorites.isEmpty) {
-      _pokemonStore!.getFavorites();
+    if (_pokemonStore.favorites.isEmpty) {
+      _pokemonStore.getFavorites();
     }
   }
 
@@ -45,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     required PokemonModel pokemon,
     required int index,
   }) {
-    _pokemonStore!.setCurrentPokemon(index: index);
+    _pokemonStore.setCurrentPokemon(index: index);
 
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -59,45 +63,61 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: DoubleTapToCloseApp(
+        snackBar: const SnackBar(
+          content: Text(
+            AppText.doubleTapCloseAppMessage,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: FontSizes.small,
+              color: Colors.white,
+            ),
+          ),
+          margin: EdgeInsets.symmetric(vertical: 40, horizontal: 16),
+          backgroundColor: Colors.black87,
+          behavior: SnackBarBehavior.floating,
+          duration: Duration(seconds: 4),
+        ),
+        child: Stack(
           clipBehavior: Clip.antiAlias,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 122),
+            Positioned(
+              top: MediaQuery.of(context).padding.top -
+                  ImagesSize.extraLarge / 2.9,
+              left: MediaQuery.of(context).size.width -
+                  (ImagesSize.extraLarge / 1.6),
+              child: Opacity(
+                child: Image.asset(
+                  Images.blackPokeBall,
+                  height: ImagesSize.extraLarge,
+                  width: ImagesSize.extraLarge,
+                ),
+                opacity: 0.2,
+              ),
+            ),
+            SafeArea(
               child: Column(
                 children: [
+                  const HomePageAppBar(),
                   Expanded(
                     child: Observer(
                       builder: (_) {
-                        switch (_pokemonStore!.fetchStatus.runtimeType) {
+                        switch (_pokemonStore.fetchStatus.runtimeType) {
                           case InProgressStatus:
                             return const Center(
                               child: CircularProgressIndicator(),
                             );
 
                           case DoneStatus:
-                            return Column(
-                              children: [
-                                Expanded(
-                                  child: TopOverflowShadow(
-                                    child: HomePageBody(
-                                      pokemons:
-                                          _pokemonStore!.pokeList!.pokemonList,
-                                      handlePokemonItemClicked:
-                                          _handlePokemonTap,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            return HomePageBody(
+                              pokemons: _pokemonStore.pokeList!.pokemonList,
+                              handlePokemonItemClicked: _handlePokemonTap,
                             );
 
                           case ErrorStatus:
-                            return const Center(
-                              child: Text('Deu ruim'),
-                            );
+                            return const ErrorPage();
 
                           default:
                             return const Center(
@@ -108,19 +128,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ],
-              ),
-            ),
-            const HomePageAppBar(),
-            Positioned(
-              top: MediaQuery.of(context).padding.top - 240 / 2.9,
-              left: MediaQuery.of(context).size.width - (240 / 1.6),
-              child: Opacity(
-                child: Image.asset(
-                  Images.blackPokeBall,
-                  height: 240,
-                  width: 240,
-                ),
-                opacity: 0.2,
               ),
             ),
           ],

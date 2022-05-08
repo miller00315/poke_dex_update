@@ -3,6 +3,7 @@ import 'package:poke_dex/domain/entities/status_entity.dart';
 import 'package:poke_dex/domain/repositories/pokemon_v2_repository.dart';
 import 'package:poke_dex/models/pokemon_detail_model.dart';
 import 'package:poke_dex/models/specie.dart';
+import 'dart:developer' as developer;
 
 part 'pokemon_v2_store.g.dart';
 
@@ -43,6 +44,12 @@ abstract class _PokemonV2StoreBase with Store {
 
       fetchPokemonDetailStatus = DoneStatus();
     } catch (e, stackTrace) {
+      developer.log(
+        e.toString(),
+        name: 'pokemon_v2_store.dart',
+        error: stackTrace.toString(),
+      );
+
       fetchPokemonDetailStatus = ErrorStatus();
     }
   }
@@ -56,6 +63,12 @@ abstract class _PokemonV2StoreBase with Store {
 
       fetchSpecieStatus = DoneStatus();
     } catch (e, stackTrace) {
+      developer.log(
+        e.toString(),
+        name: 'pokemon_v2_store.dart',
+        error: stackTrace.toString(),
+      );
+      
       fetchSpecieStatus = ErrorStatus();
     }
   }

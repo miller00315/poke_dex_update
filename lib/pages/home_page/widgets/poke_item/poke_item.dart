@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:poke_dex/config/consts/app_border_radius.dart';
 import 'package:poke_dex/config/consts/font_sizes.dart';
 import 'package:poke_dex/config/consts/images.dart';
+import 'package:poke_dex/config/consts/images_size.dart';
 import 'package:poke_dex/config/consts/palette.dart';
 import 'package:poke_dex/config/consts/urls.dart';
 import 'package:poke_dex/injector/main.dart';
@@ -10,19 +12,31 @@ import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 import 'package:poke_dex/widgets/layout/poke_item_types.dart';
 import 'package:poke_dex/utils/string_replace.dart';
 
-class PokeItem extends StatelessWidget {
-  final PokemonStore _pokemonStore = serviceLocator<PokemonStore>();
-
+class PokeItem extends StatefulWidget {
   final PokemonModel pokemon;
-
-  /// Index of pokemon in the list
+  final PokemonStore? pokemonStore;
   final int index;
 
-  PokeItem({
+  const PokeItem({
     Key? key,
     required this.pokemon,
     required this.index,
+    this.pokemonStore,
   }) : super(key: key);
+
+  @override
+  State<PokeItem> createState() => _PokeItemState();
+}
+
+class _PokeItemState extends State<PokeItem> {
+  late PokemonStore _pokemonStore;
+
+  @override
+  void initState() {
+    _pokemonStore = widget.pokemonStore ?? serviceLocator<PokemonStore>();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +56,12 @@ class PokeItem extends StatelessWidget {
                       child: Opacity(
                         child: Image.asset(
                           Images.whitePokeball,
-                          height: 80,
-                          width: 80,
+                          height: ImagesSize.extraSmall,
+                          width: ImagesSize.extraSmall,
                         ),
                         opacity: 0.5,
                       ),
-                      tag: pokemon.name! + 'roatation',
+                      tag: widget.pokemon.name! + 'roatation',
                     ),
                   ),
                   Column(
@@ -56,7 +70,7 @@ class PokeItem extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0, top: 8.0),
                         child: Text(
-                          pokemon.name!,
+                          widget.pokemon.name!,
                           style: const TextStyle(
                             fontSize: FontSizes.medium,
                             fontWeight: FontWeight.bold,
@@ -67,7 +81,7 @@ class PokeItem extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: PokeItemTypes(
-                          types: pokemon.type,
+                          types: widget.pokemon.type,
                           height: 8,
                           fontSize: FontSizes.ultraSmall,
                         ),
@@ -77,17 +91,18 @@ class PokeItem extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Hero(
-                      tag: pokemon.name!,
+                      tag: widget.pokemon.name!,
                       child: Image.network(
                         replaceVariables(
-                          text: Urls.POKEMON_IMAGE_URL,
+                          text: Urls.pokemonImageUrl,
                           variables: {
-                            Urls.POKEMON_IMAGE_NUMBER: pokemon.num!,
+                            Urls.pokemonImageReplaceNumberParameter:
+                                widget.pokemon.num!,
                           },
                         ),
                         alignment: Alignment.bottomRight,
-                        height: 80,
-                        width: 80,
+                        height: ImagesSize.extraSmall,
+                        width: ImagesSize.extraSmall,
                       ),
                     ),
                   ),
@@ -99,26 +114,26 @@ class PokeItem extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Palette.getColorType(type: pokemon.type![0])!
+                  Palette.getColorType(type: widget.pokemon.type![0])!
                       .withOpacity(0.7),
-                  Palette.getColorType(type: pokemon.type![0])!
+                  Palette.getColorType(type: widget.pokemon.type![0])!
                 ],
               ),
               borderRadius: const BorderRadius.all(
-                Radius.circular(20),
+                Radius.circular(AppBorderRadius.medium),
               ),
             ),
           ),
           Observer(
             builder: (BuildContext context) =>
-                _pokemonStore.favorites.contains(pokemon.id)
+                _pokemonStore.favorites.contains(widget.pokemon.id)
                     ? const Positioned(
-                        top: -10,
-                        right: -12,
+                        top: -(ImagesSize.ultraSmall / 4),
+                        right: -(ImagesSize.ultraSmall / 2),
                         child: Icon(
                           Icons.favorite,
-                          size: 36,
-                          color: Colors.red,
+                          size: ImagesSize.ultraSmall,
+                          color: Palette.favoriteColor,
                         ),
                       )
                     : Container(),

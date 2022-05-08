@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:poke_dex/config/consts/app_text.dart';
 import 'package:poke_dex/config/consts/font_sizes.dart';
 import 'package:poke_dex/domain/entities/status_entity.dart';
 import 'package:poke_dex/injector/main.dart';
 import 'package:poke_dex/models/specie.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_v2_store.dart';
+import 'package:poke_dex/widgets/layout/error_page.dart';
 
 class AboutTab extends StatefulWidget {
   final PokemonStore? pokemonStore;
@@ -22,8 +24,8 @@ class AboutTab extends StatefulWidget {
 }
 
 class _AboutTabState extends State<AboutTab> {
-  PokemonStore? _pokemonStore;
-  PokemonV2Store? _pokemonV2Store;
+  late PokemonStore _pokemonStore;
+  late PokemonV2Store _pokemonV2Store;
 
   @override
   void initState() {
@@ -40,7 +42,7 @@ class _AboutTabState extends State<AboutTab> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const Text(
-            'Descrição',
+            AppText.description,
             style: TextStyle(
               fontSize: FontSizes.medium,
               fontWeight: FontWeight.bold,
@@ -51,13 +53,13 @@ class _AboutTabState extends State<AboutTab> {
           ),
           Observer(
             builder: (context) {
-              switch (_pokemonV2Store!.fetchSpecieStatus.runtimeType) {
+              switch (_pokemonV2Store.fetchSpecieStatus.runtimeType) {
                 case InProgressStatus:
                   return const CircularProgressIndicator();
 
                 case DoneStatus:
                   {
-                    SpecieModel? _specie = _pokemonV2Store!.specie;
+                    SpecieModel? _specie = _pokemonV2Store.specie;
 
                     return SingleChildScrollView(
                       child: _specie != null
@@ -71,15 +73,13 @@ class _AboutTabState extends State<AboutTab> {
                               ),
                             )
                           : const Center(
-                              child: Text('Sem dados para exibir'),
+                              child: Text(AppText.noData),
                             ),
                     );
                   }
 
                 case ErrorStatus:
-                  return const Center(
-                    child: Text('Deu ruim'),
-                  );
+                  return const ErrorPage();
 
                 default:
                   return Container();
@@ -90,7 +90,7 @@ class _AboutTabState extends State<AboutTab> {
             height: 10,
           ),
           const Text(
-            'Biologia',
+            AppText.biology,
             style: TextStyle(
               fontSize: FontSizes.medium,
               fontWeight: FontWeight.bold,
@@ -109,7 +109,7 @@ class _AboutTabState extends State<AboutTab> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         const Text(
-                          'Altura',
+                          AppText.height,
                           style: TextStyle(
                             fontSize: FontSizes.small,
                             fontWeight: FontWeight.bold,
@@ -117,7 +117,7 @@ class _AboutTabState extends State<AboutTab> {
                           ),
                         ),
                         Text(
-                          _pokemonStore!.currentPokemon!.height!,
+                          _pokemonStore.currentPokemon!.height!,
                           style: const TextStyle(
                             fontSize: FontSizes.small,
                             color: Colors.black,
@@ -132,7 +132,7 @@ class _AboutTabState extends State<AboutTab> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          'Peso',
+                          AppText.weight,
                           style: TextStyle(
                             fontSize: FontSizes.small,
                             fontWeight: FontWeight.bold,
@@ -140,7 +140,7 @@ class _AboutTabState extends State<AboutTab> {
                           ),
                         ),
                         Text(
-                          _pokemonStore!.currentPokemon!.weight!,
+                          _pokemonStore.currentPokemon!.weight!,
                           style: const TextStyle(
                             fontSize: FontSizes.small,
                             color: Colors.black,

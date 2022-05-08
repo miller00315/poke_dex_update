@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:poke_dex/config/consts/appText.dart';
+import 'package:poke_dex/config/consts/app_text.dart';
+import 'package:poke_dex/config/consts/font_sizes.dart';
 
 class HomePageAppBar extends StatelessWidget {
   const HomePageAppBar({Key? key}) : super(key: key);
@@ -7,7 +8,6 @@ class HomePageAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
       height: 120,
       child: Column(
         children: [
@@ -29,10 +29,10 @@ class HomePageAppBar extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
-                  AppText.POKEDEX,
+                  AppText.pokedex,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 28,
+                    fontSize: FontSizes.ultraLarge,
                   ),
                 ),
               ),
