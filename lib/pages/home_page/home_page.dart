@@ -15,7 +15,9 @@ import 'package:poke_dex/widgets/layout/error_page.dart';
 
 import '../../models/pokemon_model.dart';
 
+/// Página principal do app
 class HomePage extends StatefulWidget {
+  /// Storage para teste, deve ser inserida nos testes
   final PokemonStore? pokemonStoreTest;
 
   const HomePage({

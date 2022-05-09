@@ -1,5 +1,5 @@
-/// Replace values inside a string that like {{value}}
-/// [text] is the string that will be replaced, [variables] is the values that will be set
+/// Altera  iuma string com base em um mapa de variáveis
+/// [text] é a string a ser alterada, [variables] são as váriaveis a serem inseridas dentro no lugar de {{key_variavel}}
 String replaceVariables(
     {required String text, required Map<String, String> variables}) {
   assert(variables.isNotEmpty);

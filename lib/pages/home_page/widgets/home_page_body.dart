@@ -3,10 +3,14 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:poke_dex/models/pokemon_model.dart';
 import 'package:poke_dex/pages/home_page/widgets/poke_item/poke_item.dart';
 
+/// Body referente a página de home
 class HomePageBody extends StatelessWidget {
   static const homePagePokeItem = 'homepagePokeItem';
 
+  /// Lista de pokemons que serão renderizados
   final List<PokemonModel>? pokemons;
+
+  /// O texto deve ser traduzido ao cria os Widgets
   final bool shouldTranslate;
 
   final void Function({
