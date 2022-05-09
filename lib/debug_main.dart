@@ -18,8 +18,7 @@ void main() async {
   };
 
   await injector.init(
-    repositoryInjector:
-        injector.RepositoryInjector.UseApi,
+    repositoryInjector: injector.RepositoryInjector.UseMock,
   );
 
   //print(Env().apiUrl);

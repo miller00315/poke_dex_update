@@ -1,16 +1,16 @@
 # poke_dex
 
-A new Flutter project.
+# Resumo do projeto
+Projeto em andamento, apresenta uma Pokedex com o objetivo de estudo e aplicação de padrões de projetos, técnicas de teste e modelagem para fluter.
 
-## Getting Started
+## 🛠️ Abrir e rodar o projeto
+<h2>No terminal execute:</h2>
+<p>flutter pub get (obter ou atualizar os pacotes)</p>
 
-This project is a starting point for a Flutter application.
+<h3>Android</h3>
+- flutter run -t lib/debug_main.dart --flavor dev (executar com dados mockados)
+- flutter run --flavor dev (executar com acesso a api)</p>
 
-A few resources to get you started if this is your first Flutter project:
+## ✔️ Técnicas e tecnologias utilizadas
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- ``Flutter``
