@@ -1,7 +1,15 @@
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' show Client;
 
 class PokemonService {
-  Future<dynamic> fetchPokemonList() async => await http.get(
+  Client client = Client();
+
+  PokemonService({Client? client}) {
+    if (client != null) {
+      this.client = client;
+    }
+  }
+
+  Future<dynamic> fetchPokemonList() async => await client.get(
         Uri.https(
           'raw.githubusercontent.com',
           'Biuni/PokemonGO-Pokedex/master/pokedex.json',
