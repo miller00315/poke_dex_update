@@ -108,13 +108,13 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
       Atom(name: '_PokemonStoreBase.fetchStatus', context: context);
 
   @override
-  StatusEntity? get fetchStatus {
+  StatusEntity get fetchStatus {
     _$fetchStatusAtom.reportRead();
     return super.fetchStatus;
   }
 
   @override
-  set fetchStatus(StatusEntity? value) {
+  set fetchStatus(StatusEntity value) {
     _$fetchStatusAtom.reportWrite(value, super.fetchStatus, () {
       super.fetchStatus = value;
     });

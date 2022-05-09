@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 
 class PokemonV2Service {
-  static Future<http.Response> fetchPokemonDetails(String name) async =>
+  Future<http.Response> fetchPokemonDetails(String name) async =>
       http.get(
         Uri.https(
           "pokeapi.co",
@@ -9,7 +9,7 @@ class PokemonV2Service {
         ),
       );
 
-  static Future<http.Response> fetchSpecie(String number) async => http.get(
+  Future<http.Response> fetchSpecie(String number) async => http.get(
         Uri.https(
           'pokeapi.co',
           'api/v2/pokemon-species/$number',

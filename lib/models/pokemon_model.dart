@@ -53,6 +53,30 @@ class PokemonModel extends Equatable {
     }
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{
+      'id': id,
+      'num': num,
+      'name': name,
+      'img': img,
+      'type': type,
+      'height': height,
+      'weight': weight,
+      'candy': candy,
+      'egg': egg
+    };
+
+    if (nextEvolution != null) {
+      data['next_evolution'] =
+          nextEvolution!.map((next) => next.toJson()).toList();
+    }
+    if (prevEvolution != null) {
+      data['prev_evolution'] =
+          prevEvolution!.map((prev) => prev.toJson()).toList();
+    }
+    return data;
+  }
+
   @override
   List<Object?> get props => [
         id,

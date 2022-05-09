@@ -7,6 +7,8 @@ class StatusEntity extends Equatable {
   List<Object> get props => [];
 }
 
+class IdleStatus extends StatusEntity {}
+
 class DoneStatus extends StatusEntity {}
 
 class InProgressStatus extends StatusEntity {}

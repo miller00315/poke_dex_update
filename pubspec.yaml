@@ -67,6 +67,9 @@ dev_dependencies:
   # Mock library for Dart inspired by Mockito.
   mockito: ^5.1.0
 
+  # A utility for providing mocked response to Image.network in Flutter widget tests.
+  network_image_mock: ^2.0.1
+
   test: any
 
 flutter:

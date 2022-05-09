@@ -13,6 +13,15 @@ class EvolutionModel extends Equatable {
       : number = json['num'],
         name = json['name'];
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{
+      'num': number,
+      'name': name
+    };
+
+    return data;
+  }
+
   @override
   List<Object?> get props => [
         number,

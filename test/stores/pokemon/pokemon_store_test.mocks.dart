@@ -5,8 +5,9 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:poke_dex/mock/pokemon_repository_mock.dart' as _i3;
-import 'package:poke_dex/mock/secure_storage_repository_mock.dart' as _i5;
+import 'package:poke_dex/mock/repositories/pokemon_repository_mock.dart' as _i3;
+import 'package:poke_dex/mock/repositories/secure_storage_repository_mock.dart'
+    as _i5;
 import 'package:poke_dex/models/pokemon_list_model.dart' as _i2;
 
 // ignore_for_file: type=lint
@@ -46,6 +47,14 @@ class MockSecureStorageRepositoryMock extends _i1.Mock
     _i1.throwOnMissingStub(this);
   }
 
+  @override
+  List<int> get favorites =>
+      (super.noSuchMethod(Invocation.getter(#favorites), returnValue: <int>[])
+          as List<int>);
+  @override
+  set favorites(List<int>? _favorites) =>
+      super.noSuchMethod(Invocation.setter(#favorites, _favorites),
+          returnValueForMissingStub: null);
   @override
   _i4.Future<List<int>> getFavoritesItems() => (super.noSuchMethod(
       Invocation.method(#getFavoritesItems, []),

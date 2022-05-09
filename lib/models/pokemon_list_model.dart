@@ -15,6 +15,15 @@ class PokeListModel extends Equatable {
     }
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (pokemonList != null) {
+      data['pokemon'] =
+          pokemonList!.map((pokemon) => pokemon.toJson()).toList();
+    }
+    return data;
+  }
+
   @override
   List<Object?> get props => [
         pokemonList,

@@ -40,7 +40,7 @@ abstract class _PokemonStoreBase with Store {
   int? currentPosition;
 
   @observable
-  StatusEntity? fetchStatus;
+  StatusEntity fetchStatus = IdleStatus();
 
   @computed
   PokeListModel? get pokeList => _pokeList;

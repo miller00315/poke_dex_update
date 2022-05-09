@@ -8,11 +8,11 @@ import 'package:poke_dex/domain/repositories/secure_storage_repository.dart';
 
 void repositoriesReleaseInjector(GetIt serviceLocator) {
   serviceLocator.registerLazySingleton<PokemonRepository>(
-    () => PokemonRepositoryData(),
+    () => PokemonRepositoryData(serviceLocator()),
   );
 
   serviceLocator.registerFactory<PokemonV2Repository>(
-    () => PokemonV2RepositoryData(),
+    () => PokemonV2RepositoryData(serviceLocator()),
   );
 
   serviceLocator.registerLazySingleton<SecureStorageRepository>(
