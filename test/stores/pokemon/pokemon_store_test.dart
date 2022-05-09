@@ -24,10 +24,19 @@ void main() {
   final pokemonRepositoryMock = MockPokemonRepositoryMock();
   final secureStorageRepositoryMock = MockSecureStorageRepositoryMock();
 
-  final PokemonStore pokemonStore =
-      PokemonStore(pokemonRepositoryMock, secureStorageRepositoryMock);
+  late PokemonStore pokemonStore;
+
+  setUp(() {
+    pokemonStore =
+        PokemonStore(pokemonRepositoryMock, secureStorageRepositoryMock);
+  });
+
   group('PokemonStore group', () {
-    test('should set a pokemonList empty', () async {
+    test('should fetch a pokemon list and set [fetchStatus] as [DoneStatus]',
+        () async {
+      assert(pokemonStore.fetchStatus is IdleStatus);
+      assert(pokemonStore.pokeList == null);
+
       final statusChanged = MockCallable<StatusEntity>();
 
       when(pokemonRepositoryMock.fetchPokemonList()).thenAnswer(
@@ -51,6 +60,31 @@ void main() {
       expect(pokemonStore.pokeList != null, true);
 
       expect(pokemonStore.pokeList!.pokemonList!.length, 2);
+    });
+
+    test('should set [status] as [errorStatus] when throws', () async {
+      assert(pokemonStore.fetchStatus is IdleStatus);
+      assert(pokemonStore.pokeList == null);
+
+      final statusChanged = MockCallable<StatusEntity>();
+
+      when(pokemonRepositoryMock.fetchPokemonList()).thenAnswer(
+        (_) => Future.error('error'),
+      );
+
+      mob.reaction<StatusEntity>((p_) => pokemonStore.fetchStatus,
+          (newValue) => statusChanged(newValue));
+
+      await pokemonStore.fetchPokemonList();
+
+      verify(pokemonRepositoryMock.fetchPokemonList()).called(1);
+
+      verifyInOrder([
+        statusChanged(InProgressStatus()),
+        statusChanged(ErrorStatus()),
+      ]);
+
+      expect(pokemonStore.pokeList, null);
     });
 
     test('should set a favorites with one element', () async {

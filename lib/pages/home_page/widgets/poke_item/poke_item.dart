@@ -12,16 +12,27 @@ import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 import 'package:poke_dex/widgets/layout/poke_item_types.dart';
 import 'package:poke_dex/utils/string_replace.dart';
 
+/// Widget para apresentação do tipo de pokemon
+/// Se [shouldTranslate] for true os textos referentes à [pokemon.type] serão traduzidos do en para pt
 class PokeItem extends StatefulWidget {
+  /// O pokemon a ser apresentado
   final PokemonModel pokemon;
+
+  /// store utilizada em testes
   final PokemonStore? pokemonStore;
+
+  /// posição na lista referente ao pokemon atual
   final int index;
+
+  /// define se os textos serão traduzidos ou não
+  final bool shouldTranslate;
 
   const PokeItem({
     Key? key,
     required this.pokemon,
     required this.index,
     this.pokemonStore,
+    this.shouldTranslate = true,
   }) : super(key: key);
 
   @override
@@ -81,6 +92,7 @@ class _PokeItemState extends State<PokeItem> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: PokeItemTypes(
+                          shouldTranslate: widget.shouldTranslate,
                           types: widget.pokemon.type,
                           height: 8,
                           fontSize: FontSizes.ultraSmall,

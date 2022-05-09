@@ -4,7 +4,10 @@ import 'package:poke_dex/models/pokemon_model.dart';
 import 'package:poke_dex/pages/home_page/widgets/poke_item/poke_item.dart';
 
 class HomePageBody extends StatelessWidget {
+  static const homePagePokeItem = 'homepagePokeItem';
+
   final List<PokemonModel>? pokemons;
+  final bool shouldTranslate;
 
   final void Function({
     required PokemonModel pokemon,
@@ -15,6 +18,7 @@ class HomePageBody extends StatelessWidget {
     Key? key,
     required this.pokemons,
     required this.handlePokemonItemClicked,
+    this.shouldTranslate = true,
   }) : super(key: key);
 
   @override
@@ -35,11 +39,13 @@ class HomePageBody extends StatelessWidget {
             columnCount: 2,
             child: ScaleAnimation(
               child: GestureDetector(
+                key: Key('$homePagePokeItem$index'),
                 onTap: () => handlePokemonItemClicked(
                   pokemon: pokemon,
                   index: index,
                 ),
                 child: PokeItem(
+                  shouldTranslate: shouldTranslate,
                   pokemon: pokemon,
                   index: index,
                 ),

@@ -1,11 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:poke_dex/mock/fake_data/pokemon_fake_data.dart';
 import 'package:poke_dex/pages/home_page/widgets/poke_item/poke_item.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 import 'package:flutter/material.dart';
+import 'package:poke_dex/widgets/layout/poke_item_types.dart';
 
 import '../../../../stores/pokemon/pokemon_store_test.mocks.dart';
 
@@ -24,6 +23,7 @@ void main() {
               pokemon: pokemon,
               index: 0,
               pokemonStore: pokemonStore,
+              shouldTranslate: false,
             ),
           ),
         );
@@ -37,6 +37,12 @@ void main() {
             find.text(pokemon.name!),
             findsOneWidget,
           );
+
+          expect(find.byType(PokeItemTypes), findsOneWidget);
+
+          for (final type in pokemon.type!) {
+            expect(find.text(type), findsOneWidget);
+          }
 
           expect(find.byType(Icon), findsNothing);
         },

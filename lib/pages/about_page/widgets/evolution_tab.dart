@@ -34,7 +34,7 @@ class _EvolutionTabState extends State<EvolutionTab> {
   List<Widget> getEvolution(PokemonModel pokemon) {
     List<Widget> _list = [];
     if (pokemon.prevEvolution != null) {
-      for (var pokemonEvolution in pokemon.prevEvolution!) {
+      for (final pokemonEvolution in pokemon.prevEvolution!) {
         _list.add(
           resizePokemon(
             _pokemonStore.getImage(number: pokemonEvolution.number!),
@@ -75,7 +75,7 @@ class _EvolutionTabState extends State<EvolutionTab> {
 
     if (pokemon.nextEvolution != null) {
       _list.add(const Icon(Icons.keyboard_arrow_down));
-      for (var f in pokemon.nextEvolution!) {
+      for (final f in pokemon.nextEvolution!) {
         _list.add(
           resizePokemon(
             _pokemonStore.getImage(

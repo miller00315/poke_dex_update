@@ -31,7 +31,7 @@ class _StatusTabState extends State<StatusTab> {
     List<int?> list = [1, 2, 3, 4, 5, 6, 7];
     int sum = 0;
     if (pokeApiV2?.stats != null) {
-      for (var statistic in pokeApiV2!.stats!) {
+      for (final statistic in pokeApiV2!.stats!) {
         sum = sum + statistic.baseStat!;
         switch (statistic.stat!.name) {
           case 'speed':
