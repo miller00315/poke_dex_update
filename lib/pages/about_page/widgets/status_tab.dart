@@ -7,11 +7,8 @@ import 'package:poke_dex/models/pokemon_detail_model.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_v2_store.dart';
 
 class StatusTab extends StatelessWidget {
-  final PokemonV2Store? pokemonV2Store;
-
   StatusTab({
     Key? key,
-    this.pokemonV2Store,
   }) : super(key: key);
 
   final PokemonV2Store _pokemonV2Store = serviceLocator<PokemonV2Store>();
