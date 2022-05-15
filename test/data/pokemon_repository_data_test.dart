@@ -1,10 +1,8 @@
 import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:poke_dex/data/pokemon_repository_data.dart';
+import 'package:poke_dex/data/repositories/pokemon_repository_data.dart';
 import 'package:poke_dex/mock/fake_data/pokemon_fake_data.dart';
 import 'package:poke_dex/services/pokemon_service.dart';
 

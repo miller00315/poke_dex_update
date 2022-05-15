@@ -43,6 +43,9 @@ dependencies:
   # MobX is a state-management library that makes it simple to connect the reactive data of your application with the UI
   mobx: ^2.0.7
 
+  # A wrapper around InheritedWidget to make them easier to use and more reusable.
+  provider: ^6.0.2
+
   # A widget that can be dragged and scrolled in a single gesture and snapped to a list of extents.
   sliding_sheet: ^0.5.2
 

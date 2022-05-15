@@ -6,26 +6,15 @@ import 'package:poke_dex/injector/main.dart';
 import 'package:poke_dex/models/pokemon_detail_model.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_v2_store.dart';
 
-class StatusTab extends StatefulWidget {
+class StatusTab extends StatelessWidget {
   final PokemonV2Store? pokemonV2Store;
 
-  const StatusTab({
+  StatusTab({
     Key? key,
     this.pokemonV2Store,
   }) : super(key: key);
 
-  @override
-  State<StatusTab> createState() => _StatusTabState();
-}
-
-class _StatusTabState extends State<StatusTab> {
-  late PokemonV2Store _pokemonV2Store;
-
-  @override
-  void initState() {
-    _pokemonV2Store = widget.pokemonV2Store ?? serviceLocator<PokemonV2Store>();
-    super.initState();
-  }
+  final PokemonV2Store _pokemonV2Store = serviceLocator<PokemonV2Store>();
 
   List<int?> getStatusPokemon(PokemonDetailModel? pokeApiV2) {
     List<int?> list = [1, 2, 3, 4, 5, 6, 7];

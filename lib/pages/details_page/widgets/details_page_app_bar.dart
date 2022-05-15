@@ -5,28 +5,15 @@ import 'package:poke_dex/config/consts/palette.dart';
 import 'package:poke_dex/injector/main.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 
-class DetailsPageAppBar extends StatefulWidget {
+class DetailsPageAppBar extends StatelessWidget {
   final double opacityTitleAppBar;
-  final PokemonStore? pokemonStore;
 
-  const DetailsPageAppBar({
+  DetailsPageAppBar({
     Key? key,
     required this.opacityTitleAppBar,
-    this.pokemonStore,
   }) : super(key: key);
 
-  @override
-  State<DetailsPageAppBar> createState() => _DetailsPageAppBarState();
-}
-
-class _DetailsPageAppBarState extends State<DetailsPageAppBar> {
-  late PokemonStore _pokemonStore;
-
-  @override
-  void initState() {
-    _pokemonStore = widget.pokemonStore ?? serviceLocator<PokemonStore>();
-    super.initState();
-  }
+  final PokemonStore _pokemonStore = serviceLocator<PokemonStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +35,9 @@ class _DetailsPageAppBarState extends State<DetailsPageAppBar> {
               height: 50,
               width: 50,
             ),
-            opacity: widget.opacityTitleAppBar,
+            opacity: opacityTitleAppBar,
           ),
-          opacity: widget.opacityTitleAppBar,
+          opacity: opacityTitleAppBar,
         ),
         Observer(
           builder: (BuildContext context) => IconButton(

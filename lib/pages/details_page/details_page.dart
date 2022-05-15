@@ -11,14 +11,10 @@ import 'package:sliding_sheet/sliding_sheet.dart';
 
 class DetailsPage extends StatefulWidget {
   final int index;
-  final PokemonStore? pokemonStore;
-  final PokemonV2Store? pokemonV2Store;
 
   const DetailsPage({
     Key? key,
     required this.index,
-    this.pokemonStore,
-    this.pokemonV2Store,
   }) : super(key: key);
 
   @override
@@ -28,8 +24,8 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   PageController? _pageController;
 
-  late PokemonStore _pokemonStore;
-  late PokemonV2Store _pokemonV2Store;
+  final PokemonStore _pokemonStore = serviceLocator<PokemonStore>();
+  final PokemonV2Store _pokemonV2Store = serviceLocator<PokemonV2Store>();
 
   late double _progress;
   double? _multiple;
@@ -42,10 +38,6 @@ class _DetailsPageState extends State<DetailsPage> {
 
     _pageController =
         PageController(initialPage: widget.index, viewportFraction: 0.5);
-
-    _pokemonStore = widget.pokemonStore ?? serviceLocator<PokemonStore>();
-
-    _pokemonV2Store = widget.pokemonV2Store ?? serviceLocator<PokemonV2Store>();
 
     _pokemonV2Store.fetchPokemonDetails(_pokemonStore.currentPokemon!.name!);
 
@@ -60,7 +52,6 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   void dispose() {
     _pageController!.dispose();
-    _pokemonV2Store.dispose();
 
     super.dispose();
   }

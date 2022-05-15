@@ -10,11 +10,9 @@ import 'package:poke_dex/pages/about_page/widgets/status_tab.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 
 class AboutPage extends StatefulWidget {
-  final PokemonStore? pokemonStore;
 
   const AboutPage({
     Key? key,
-    this.pokemonStore,
   }) : super(key: key);
 
   @override
@@ -34,7 +32,7 @@ class _AboutPageState extends State<AboutPage>
 
     _pageController = PageController(initialPage: 0);
 
-    _pokemonStore = widget.pokemonStore ?? serviceLocator<PokemonStore>();
+    _pokemonStore = serviceLocator<PokemonStore>();
 
     _disposer = reaction(
       (f) => _pokemonStore.currentPokemon,
@@ -103,7 +101,7 @@ class _AboutPageState extends State<AboutPage>
           duration: const Duration(milliseconds: 300),
         ),
         controller: _pageController,
-        children: const [
+        children:  [
           AboutTab(),
           EvolutionTab(),
           StatusTab(),

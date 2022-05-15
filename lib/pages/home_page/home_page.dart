@@ -17,12 +17,8 @@ import '../../models/pokemon_model.dart';
 
 /// Página principal do app
 class HomePage extends StatefulWidget {
-  /// Storage para teste, deve ser inserida nos testes
-  final PokemonStore? pokemonStoreTest;
-
   const HomePage({
     Key? key,
-    this.pokemonStoreTest,
   }) : super(key: key);
 
   @override
@@ -30,13 +26,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late PokemonStore _pokemonStore;
+  final PokemonStore _pokemonStore = serviceLocator<PokemonStore>();
 
   @override
   void initState() {
     super.initState();
-
-    _pokemonStore = widget.pokemonStoreTest ?? serviceLocator<PokemonStore>();
 
     if (_pokemonStore.pokeList == null) {
       _pokemonStore.fetchPokemonList();

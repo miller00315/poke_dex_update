@@ -14,7 +14,7 @@ import 'package:poke_dex/utils/string_replace.dart';
 
 /// Widget para apresentação do tipo de pokemon
 /// Se [shouldTranslate] for true os textos referentes à [pokemon.type] serão traduzidos do en para pt
-class PokeItem extends StatefulWidget {
+class PokeItem extends StatelessWidget {
   /// O pokemon a ser apresentado
   final PokemonModel pokemon;
 
@@ -27,7 +27,7 @@ class PokeItem extends StatefulWidget {
   /// define se os textos serão traduzidos ou não
   final bool shouldTranslate;
 
-  const PokeItem({
+  PokeItem({
     Key? key,
     required this.pokemon,
     required this.index,
@@ -35,19 +35,7 @@ class PokeItem extends StatefulWidget {
     this.shouldTranslate = true,
   }) : super(key: key);
 
-  @override
-  State<PokeItem> createState() => _PokeItemState();
-}
-
-class _PokeItemState extends State<PokeItem> {
-  late PokemonStore _pokemonStore;
-
-  @override
-  void initState() {
-    _pokemonStore = widget.pokemonStore ?? serviceLocator<PokemonStore>();
-
-    super.initState();
-  }
+  final PokemonStore _pokemonStore = serviceLocator<PokemonStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +60,7 @@ class _PokeItemState extends State<PokeItem> {
                         ),
                         opacity: 0.5,
                       ),
-                      tag: widget.pokemon.name! + 'roatation',
+                      tag: pokemon.name! + 'roatation',
                     ),
                   ),
                   Column(
@@ -81,7 +69,7 @@ class _PokeItemState extends State<PokeItem> {
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0, top: 8.0),
                         child: Text(
-                          widget.pokemon.name!,
+                          pokemon.name!,
                           style: const TextStyle(
                             fontSize: FontSizes.medium,
                             fontWeight: FontWeight.bold,
@@ -92,8 +80,8 @@ class _PokeItemState extends State<PokeItem> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: PokeItemTypes(
-                          shouldTranslate: widget.shouldTranslate,
-                          types: widget.pokemon.type,
+                          shouldTranslate: shouldTranslate,
+                          types: pokemon.type,
                           height: 8,
                           fontSize: FontSizes.ultraSmall,
                         ),
@@ -103,13 +91,13 @@ class _PokeItemState extends State<PokeItem> {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Hero(
-                      tag: widget.pokemon.name!,
+                      tag: pokemon.name!,
                       child: Image.network(
                         replaceVariables(
                           text: Urls.pokemonImageUrl,
                           variables: {
                             Urls.pokemonImageReplaceNumberParameter:
-                                widget.pokemon.num!,
+                                pokemon.num!,
                           },
                         ),
                         alignment: Alignment.bottomRight,
@@ -126,9 +114,9 @@ class _PokeItemState extends State<PokeItem> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Palette.getColorType(type: widget.pokemon.type![0])!
+                  Palette.getColorType(type: pokemon.type![0])!
                       .withOpacity(0.7),
-                  Palette.getColorType(type: widget.pokemon.type![0])!
+                  Palette.getColorType(type: pokemon.type![0])!
                 ],
               ),
               borderRadius: const BorderRadius.all(
@@ -138,7 +126,7 @@ class _PokeItemState extends State<PokeItem> {
           ),
           Observer(
             builder: (BuildContext context) =>
-                _pokemonStore.favorites.contains(widget.pokemon.id)
+                _pokemonStore.favorites.contains(pokemon.id)
                     ? const Positioned(
                         top: -(ImagesSize.ultraSmall / 4),
                         right: -(ImagesSize.ultraSmall / 2),

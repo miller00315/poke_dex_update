@@ -5,27 +5,13 @@ import 'package:poke_dex/injector/main.dart';
 import 'package:poke_dex/models/pokemon_model.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 
-class EvolutionTab extends StatefulWidget {
-  final PokemonStore? pokemonStore;
+class EvolutionTab extends StatelessWidget {
 
-  const EvolutionTab({
+  EvolutionTab({
     Key? key,
-    this.pokemonStore,
   }) : super(key: key);
-
-  @override
-  State<EvolutionTab> createState() => _EvolutionTabState();
-}
-
-class _EvolutionTabState extends State<EvolutionTab> {
-  late PokemonStore _pokemonStore;
-
-  @override
-  void initState() {
-    _pokemonStore = widget.pokemonStore ?? serviceLocator<PokemonStore>();
-
-    super.initState();
-  }
+  
+  final PokemonStore _pokemonStore = serviceLocator<PokemonStore>();
 
   Widget resizePokemon(Widget widget) {
     return SizedBox(height: 80, width: 80, child: widget);

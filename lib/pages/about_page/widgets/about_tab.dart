@@ -9,30 +9,13 @@ import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_v2_store.dart';
 import 'package:poke_dex/widgets/layout/error_page.dart';
 
-class AboutTab extends StatefulWidget {
-  final PokemonStore? pokemonStore;
-  final PokemonV2Store? pokemonV2Store;
-
-  const AboutTab({
+class AboutTab extends StatelessWidget {
+  AboutTab({
     Key? key,
-    this.pokemonStore,
-    this.pokemonV2Store,
   }) : super(key: key);
 
-  @override
-  State<AboutTab> createState() => _AboutTabState();
-}
-
-class _AboutTabState extends State<AboutTab> {
-  late PokemonStore _pokemonStore;
-  late PokemonV2Store _pokemonV2Store;
-
-  @override
-  void initState() {
-    _pokemonStore = widget.pokemonStore ?? serviceLocator<PokemonStore>();
-    _pokemonV2Store = widget.pokemonV2Store ?? serviceLocator<PokemonV2Store>();
-    super.initState();
-  }
+  final PokemonStore _pokemonStore = serviceLocator<PokemonStore>();
+  final PokemonV2Store _pokemonV2Store = serviceLocator<PokemonV2Store>();
 
   @override
   Widget build(BuildContext context) {
