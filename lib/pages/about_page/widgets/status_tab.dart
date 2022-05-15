@@ -67,7 +67,7 @@ class StatusTab extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    AppText.sp_def,
+                    AppText.spDef,
                     style: TextStyle(
                         fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),
@@ -75,7 +75,7 @@ class StatusTab extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    AppText.sp_atq,
+                    AppText.spAtq,
                     style: TextStyle(
                         fontSize: FontSizes.medium, color: Colors.grey[600]),
                   ),

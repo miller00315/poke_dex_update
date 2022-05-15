@@ -11,8 +11,8 @@ class AppText {
   static const insect = 'Inseto';
   static const noData = 'Sem dados para exibir';
   static const pokedex = 'Pokedex';
-  static const sp_def = 'Sp. Def';
-  static const sp_atq = 'Sp. Atq';
+  static const spDef = 'Sp. Def';
+  static const spAtq = 'Sp. Atq';
   static const speed = 'Velocidade';
   static const status = 'Status';
   static const total = 'Total';

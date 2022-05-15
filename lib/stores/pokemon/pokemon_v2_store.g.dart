@@ -91,20 +91,6 @@ mixin _$PokemonV2Store on _PokemonV2StoreBase, Store {
     return _$fetchSpecieAsyncAction.run(() => super.fetchSpecie(number));
   }
 
-  late final _$_PokemonV2StoreBaseActionController =
-      ActionController(name: '_PokemonV2StoreBase', context: context);
-
-  @override
-  dynamic dispose() {
-    final _$actionInfo = _$_PokemonV2StoreBaseActionController.startAction(
-        name: '_PokemonV2StoreBase.dispose');
-    try {
-      return super.dispose();
-    } finally {
-      _$_PokemonV2StoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''

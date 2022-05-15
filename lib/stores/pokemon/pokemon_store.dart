@@ -31,7 +31,7 @@ abstract class _PokemonStoreBase with Store {
   PokemonModel? _currentPokemon;
 
   @observable
-  List<int> favorites = [];
+  ObservableList<int> favorites = <int>[].asObservable();
 
   @observable
   Color? pokemonColor;
@@ -90,9 +90,9 @@ abstract class _PokemonStoreBase with Store {
   Future favoriteUnfavorite(int id) async {
     try {
       if (favorites.contains(id)) {
-        favorites = List.from(favorites.where((element) => element != id));
+        favorites.remove(id);
       } else {
-        favorites = List.from([...favorites, id]);
+        favorites.add(id);
       }
 
       await _secureStorageRepository.setFavoritesItem(favorites);
@@ -108,7 +108,8 @@ abstract class _PokemonStoreBase with Store {
   @action
   Future getFavorites() async {
     try {
-      favorites = await _secureStorageRepository.getFavoritesItems();
+      favorites =
+          (await _secureStorageRepository.getFavoritesItems()).asObservable();
     } catch (e, stackTrace) {
       developer.log(
         e.toString(),

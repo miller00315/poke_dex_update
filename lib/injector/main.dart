@@ -6,15 +6,15 @@ import 'package:poke_dex/injector/stores_injector/stores_injector.dart';
 
 final serviceLocator = GetIt.instance;
 
-enum RepositoryInjector { UseMock, UseApi }
+enum RepositoryInjector { useMock, useApi }
 
 Future<void> init({
-  RepositoryInjector repositoryInjector = RepositoryInjector.UseApi,
+  RepositoryInjector repositoryInjector = RepositoryInjector.useApi,
 }) async {
   storesInjector(serviceLocator);
   servicesInjector(serviceLocator);
 
-  (repositoryInjector == RepositoryInjector.UseApi)
+  (repositoryInjector == RepositoryInjector.useApi)
       ? repositoriesReleaseInjector(serviceLocator)
       : repositoriesMockInjector(serviceLocator);
 }

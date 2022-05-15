@@ -60,13 +60,13 @@ mixin _$PokemonStore on _PokemonStoreBase, Store {
       Atom(name: '_PokemonStoreBase.favorites', context: context);
 
   @override
-  List<int> get favorites {
+  ObservableList<int> get favorites {
     _$favoritesAtom.reportRead();
     return super.favorites;
   }
 
   @override
-  set favorites(List<int> value) {
+  set favorites(ObservableList<int> value) {
     _$favoritesAtom.reportWrite(value, super.favorites, () {
       super.favorites = value;
     });

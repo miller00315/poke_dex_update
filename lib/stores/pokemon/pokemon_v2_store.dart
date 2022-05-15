@@ -27,14 +27,6 @@ abstract class _PokemonV2StoreBase with Store {
   StatusEntity? fetchPokemonDetailStatus;
 
   @action
-  dispose() {
-    pokemonDetail = null;
-    specie = null;
-    fetchPokemonDetailStatus = null;
-    fetchSpecieStatus = null;
-  }
-
-  @action
   Future fetchPokemonDetails(String name) async {
     try {
       fetchPokemonDetailStatus = InProgressStatus();

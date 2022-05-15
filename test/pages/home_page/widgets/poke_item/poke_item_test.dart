@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mobx/mobx.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:poke_dex/mock/fake_data/pokemon_fake_data.dart';
 import 'package:poke_dex/pages/home_page/widgets/poke_item/poke_item.dart';
@@ -53,7 +54,7 @@ void main() {
         (WidgetTester tester) async {
       mockNetworkImagesFor(
         () async {
-          pokemonStore.favorites = [pokemon.id!];
+          pokemonStore.favorites = [pokemon.id!].asObservable();
 
           await tester.pumpWidget(createWidgetForTesting());
 

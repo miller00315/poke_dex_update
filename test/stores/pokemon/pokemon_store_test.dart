@@ -8,7 +8,6 @@ import 'package:poke_dex/domain/entities/status_entity.dart';
 import 'package:poke_dex/mock/fake_data/pokemon_fake_data.dart';
 import 'package:poke_dex/mock/repositories/pokemon_repository_mock.dart';
 import 'package:poke_dex/mock/repositories/secure_storage_repository_mock.dart';
-import 'package:poke_dex/models/pokemon_list_model.dart';
 import 'package:poke_dex/stores/pokemon/pokemon_store.dart';
 
 import 'pokemon_store_test.mocks.dart';
