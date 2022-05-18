@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:poke_dex/config/consts/app_text.dart';
@@ -25,8 +27,14 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  late Animation<double> animation;
+  late AnimationController controller;
+
   final PokemonStore _pokemonStore = serviceLocator<PokemonStore>();
+
+  double size = ImagesSize.extraLarge;
 
   @override
   void initState() {
@@ -39,7 +47,26 @@ class _HomePageState extends State<HomePage> {
     if (_pokemonStore.favorites.isEmpty) {
       _pokemonStore.getFavorites();
     }
+
+    controller = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+
+    animation = Tween<double>(
+      begin: 0,
+      end: ImagesSize.extraLarge,
+    ).animate(controller);
+
+    controller.forward();
   }
+
+  @override
+  void didUpdateWidget(HomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void animateButton() async {}
 
   void _handlePokemonTap({
     required PokemonModel pokemon,
@@ -79,19 +106,28 @@ class _HomePageState extends State<HomePage> {
         child: Stack(
           clipBehavior: Clip.antiAlias,
           children: [
-            Positioned(
-              top: MediaQuery.of(context).padding.top -
-                  ImagesSize.extraLarge / 2.9,
-              left: MediaQuery.of(context).size.width -
-                  (ImagesSize.extraLarge / 1.6),
-              child: Opacity(
-                child: Image.asset(
-                  Images.blackPokeBall,
-                  height: ImagesSize.extraLarge,
-                  width: ImagesSize.extraLarge,
-                ),
-                opacity: 0.2,
-              ),
+            AnimatedBuilder(
+              animation: animation,
+              builder: (context, child) {
+                return Positioned(
+                  top: MediaQuery.of(context).padding.top -
+                      animation.value / 2.9,
+                  left: MediaQuery.of(context).size.width -
+                      (animation.value / 1.6),
+                  child: Opacity(
+                    child: GestureDetector(
+                      onTap: () => animateButton(),
+                      child: Image.asset(
+                        Images.blackPokeBall,
+                        fit: BoxFit.fill,
+                        width: animation.value,
+                        height: animation.value,
+                      ),
+                    ),
+                    opacity: 0.2,
+                  ),
+                );
+              },
             ),
             SafeArea(
               child: Column(
